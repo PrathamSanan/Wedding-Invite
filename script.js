@@ -1812,7 +1812,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 const message =
-                    `Hello! ❤️ My name is *${name}*. ` +
+                    `Namaskar! ❤️ My name is *${name}*. ` +
                     `I am confirming my presence (${count}) ` +
                     `at Vishal & Akshita's wedding on ` +
                     `4 December 2026.\n\n` +
@@ -1856,8 +1856,8 @@ document.addEventListener("DOMContentLoaded", () => {
             () => {
 
                 const message =
-                    "Hello Vishal & Akshita! ❤️ " +
-                    "I am excited to be a part of your " +
+                    "Namaskar Sanan Family! ❤️ " +
+                    "Excited to be a part of your " +
                     "wedding celebration on 4 December 2026.";
 
 
