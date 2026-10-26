@@ -1,0 +1,76 @@
+/* ===== Enhancement layer: cute motion graphics + polish ===== */
+
+.fx-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:25;pointer-events:none}
+
+/* word-split headline helpers (fixes inherited bold from <b>) */
+.w,.wi{font-weight:inherit;font-style:inherit}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.1em .06em .18em;margin:-.1em -.06em -.18em}
+.wi{display:inline-block;will-change:transform}
+
+/* ---------- hero ---------- */
+.hero-image{inset:-14% 0}
+.hero-content::before{
+  content:"";position:absolute;left:50%;top:50%;width:min(120vw,900px);aspect-ratio:1;
+  transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
+  background:radial-gradient(circle,rgba(223,183,67,.22),transparent 62%);
+  animation:heroGlow 6s ease-in-out infinite alternate;
+}
+@keyframes heroGlow{from{opacity:.5;transform:translate(-50%,-50%) scale(.9)}to{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+.discover{top:auto;bottom:28px}
+.discover i{animation:drip 2s ease-in-out infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0)}60%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.hero-orbit::after{content:"";position:absolute;top:-4px;left:50%;width:7px;height:7px;border-radius:50%;background:var(--gold-light);box-shadow:0 0 18px 4px var(--gold)}
+
+.hero-sparkles{position:absolute;inset:0;z-index:9;pointer-events:none;overflow:hidden}
+.hero-sparkles span{position:absolute;color:var(--gold-light);opacity:0;animation:twinkle var(--d,3.4s) ease-in-out var(--delay,0s) infinite}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:.95;transform:scale(1) rotate(60deg)}}
+
+/* ---------- marquee ---------- */
+.marquee{overflow:hidden;border-block:1px solid var(--border);background:#0a0204;padding:16px 0;position:relative;z-index:2}
+.marquee-track{display:flex;width:max-content;animation:mq 40s linear infinite}
+.marquee-track span{font-family:"Italianno",cursive;font-size:44px;line-height:1.2;color:var(--gold-light);white-space:pre}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- cute little loops ---------- */
+.ornament{animation:orn 4s ease-in-out infinite alternate}
+@keyframes orn{from{text-shadow:0 0 10px rgba(223,183,67,.25);letter-spacing:8px}to{text-shadow:0 0 24px rgba(223,183,67,.7);letter-spacing:11px}}
+.story-star,.event-symbol,.family-divider{display:inline-block;animation:starSpin 7s ease-in-out infinite}
+@keyframes starSpin{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(1.25)}}
+.couple-symbol{position:relative;overflow:visible}
+.couple-symbol b{display:inline-block;animation:heartBeat 1.8s ease-in-out infinite}
+@keyframes heartBeat{0%,100%{transform:scale(1)}14%{transform:scale(1.28)}28%{transform:scale(1)}42%{transform:scale(1.18)}70%{transform:scale(1)}}
+.love-heart{position:absolute;left:50%;top:50%;pointer-events:none;color:#e8657a;line-height:1;z-index:5;will-change:transform,opacity}
+
+.count-box{position:relative;transition:border-color .4s,box-shadow .4s}
+.count-box::before{content:"♥";position:absolute;top:9px;left:50%;margin-left:-5px;font-size:10px;line-height:1;color:#e8657a;opacity:.8;animation:heartBeat 2s ease-in-out infinite}
+.count-box:nth-child(2)::before{animation-delay:.2s}
+.count-box:nth-child(3)::before{animation-delay:.4s}
+.count-box:nth-child(4)::before{animation-delay:.6s}
+.count-box:hover{border-color:var(--gold);box-shadow:0 15px 45px rgba(223,183,67,.2)}
+
+/* ---------- hover polish ---------- */
+.event-card{transition:border-color .5s,box-shadow .5s,translate .5s}
+.event-card:hover{transform:none;translate:0 -10px}
+.gallery-item{transition:border-color .5s,box-shadow .5s,translate .5s,scale .5s,rotate .5s}
+.gallery-item:hover{transform:none;translate:0 -12px;scale:1.04;rotate:-1.2deg}
+.gallery-item:nth-child(even):hover{rotate:1.2deg}
+.venue-image,.final-image{overflow:hidden}
+
+.gold-button,.outline-button{transition:box-shadow .4s,border-color .4s,color .4s,translate .4s}
+.gold-button:hover,.outline-button:hover{transform:none;translate:0 -4px}
+.gold-button{background-size:200% 100%;position:relative;overflow:hidden}
+.gold-button::after{content:"";position:absolute;top:0;left:0;width:40%;height:100%;background:rgba(255,255,255,.55);transform:translateX(-160%) skewX(-20deg);animation:sweep 3.5s ease-in-out infinite}
+@keyframes sweep{0%,60%{transform:translateX(-160%) skewX(-20deg)}100%{transform:translateX(420%) skewX(-20deg)}}
+
+/* ---------- menu ---------- */
+.menu-button span{transition:transform .4s}
+body.menu-open .menu-button span:first-child{transform:translateY(3.5px) rotate(45deg)}
+body.menu-open .menu-button span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.mobile-menu-inner>*{opacity:0;transform:translateY(24px);transition:opacity .4s,transform .5s,color .3s}
+.mobile-menu.open .mobile-menu-inner>*{opacity:1;transform:none;transition-delay:calc(var(--i,0)*.07s + .15s)}
+
+@media(max-width:900px){.marquee-track span{font-size:34px}}
+@media(prefers-reduced-motion:reduce){
+  .marquee-track,.gold-button::after,.hero-content::before,.discover i,.ornament,.story-star,.event-symbol,.family-divider,.couple-symbol b,.count-box::before,.hero-sparkles span{animation:none!important}
+  .hero-sparkles{display:none}
+}
